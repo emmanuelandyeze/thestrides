@@ -15,7 +15,7 @@ import {
 } from 'react-icons/io5';
 
 type PostItemProps = {
-	post: Post[];
+	post: any;
 	userIsCreator: boolean;
 	userVoteValue?: number;
 	onVote: () => {};
@@ -52,9 +52,9 @@ const PostItem: React.FC<PostItemProps> = ({
 							fontSize={'9pt'}
 						>
 							<Text>
-								Posted by u/{post?.creatorDisplayName}{' '}
+								Posted by u/{post.creatorDisplayName}{' '}
 								{moment(
-									new Date(post?.createdAt?.seconds * 1000),
+									new Date(post.createdAt?.seconds * 1000),
 								).fromNow()}
 							</Text>
 						</Stack>
