@@ -45,7 +45,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
 			}));
 			setPostStateValue((prev) => ({
 				...prev,
-				posts: posts as Post[],
+				posts: posts as any,
 			}));
 		} catch (error) {
 			console.log(error);
