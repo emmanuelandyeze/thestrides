@@ -66,7 +66,7 @@ const useCommunityData = () => {
 	const joinCommunity = async (
 		communityData: Community,
 	) => {
-		setLoading(true);
+		setLoading(true); 
 		try {
 			const batch = writeBatch(firestore);
 			const newSnippet: CommunitySnippet = {

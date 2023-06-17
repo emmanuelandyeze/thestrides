@@ -12,9 +12,10 @@ export interface Community {
 }
 
 export interface CommunitySnippet {
-    communityId: string,
-    isModerator?: boolean,
-    communityName: string
+	communityId: string;
+	isModerator?: boolean;
+	communityName: string;
+    imageURL?: string;
 }
 
 interface CommunityState {
