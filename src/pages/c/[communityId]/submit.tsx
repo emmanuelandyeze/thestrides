@@ -11,8 +11,7 @@ import { useRecoilValue } from 'recoil';
 
 const SubmitPostPage: React.FC = () => {
     const [user] = useAuthState(auth)
-    const router = useRouter();
-		const { communityId } = router.query;
+    
 		// const visitedCommunities = useRecoilValue(communityState).visitedCommunities;
 		const communityStateValue =
 			useRecoilValue(communityState);
@@ -27,7 +26,7 @@ const SubmitPostPage: React.FC = () => {
 				>
 					<Text>Create a Post</Text>
 				</Box>
-				{user && <NewPostForm user={user} communityId={communityId} />}
+				{user && <NewPostForm user={user} />}
 			</>
 			<></>
 		</PageContent>

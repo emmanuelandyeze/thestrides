@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React, { Ref, useRef } from 'react';
 import {
 	Flex,
 	Stack,
@@ -10,7 +10,6 @@ type ImageUploadProps = {
 	selectedFile?: string;
 	setSelectedFile: (value: string) => void;
 	setSelectedTab: (value: string) => void;
-	selectFileRef: React.RefObject<HTMLInputElement>;
 	onSelectImage: (
 		event: React.ChangeEvent<HTMLInputElement>,
 	) => void;
@@ -20,9 +19,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 	selectedFile,
 	setSelectedFile,
 	setSelectedTab,
-	selectFileRef,
 	onSelectImage,
 }) => {
+	const selectedFileRef = useRef<HTMLInputElement>(null)
 	return (
 		<Flex
 			direction="column"
@@ -36,6 +35,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 						src={selectedFile as string}
 						maxWidth="400px"
 						maxHeight="400px"
+						alt=''
 					/>
 					<Stack direction="row" mt={4}>
 						<Button
@@ -66,7 +66,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 					<Button
 						variant="outline"
 						height="28px"
-						onClick={() => selectFileRef.current?.click()}
+						onClick={() => selectedFileRef.current?.click()}
 					>
 						Upload
 					</Button>
@@ -75,7 +75,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 						type="file"
 						accept="image/x-png,image/gif,image/jpeg"
 						hidden
-						ref={selectFileRef}
+						ref={selectedFileRef}
 						onChange={onSelectImage}
 					/>
 				</Flex>
