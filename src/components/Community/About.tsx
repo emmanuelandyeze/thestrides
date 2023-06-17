@@ -66,7 +66,7 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 
     return (
 			<>
-				<Box position="sticky" top="14px">
+				<Box position="sticky" top="55px">
 					<Flex
 						justify="space-between"
 						align="center"

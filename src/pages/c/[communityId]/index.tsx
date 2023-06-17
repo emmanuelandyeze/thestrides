@@ -6,6 +6,7 @@ import NotFound from '@/src/components/Community/NotFound';
 import PageContent from '@/src/components/Layout/PageContent';
 import Posts from '@/src/components/Posts/Posts';
 import { firestore } from '@/src/firebase/clientApp';
+import { Flex } from '@chakra-ui/react';
 import { doc, getDoc } from 'firebase/firestore';
 import {
 	GetServerSideProps,
@@ -35,11 +36,14 @@ const CommunityPage: React.FC<communityPageProps> = ({
 		return <NotFound />;
 	}
 	return (
-		<div>
+		<div style={{paddingTop: '3rem'}}>
 			<Header communityData={communityData} />
 			<PageContent>
 				<>
-					<CreatePostLink />
+					<Flex display={{base: 'block', md: 'none'}} mb={2}>
+						<About communityData={communityData} />
+					</Flex>
+					{/* <CreatePostLink /> */}
 					<Posts communityData={communityData} />
 				</>
 				<>

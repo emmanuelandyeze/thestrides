@@ -14,6 +14,9 @@ const Navbar: React.FC = () => {
 			height={'50px'}
 			justifyContent={'space-between'}
 			padding={'6px 12px 5px 5px'}
+			position={'fixed'}
+			zIndex={50}
+			width={'100%'}
 		>
 			<Flex align={'center'}>
 				<Image
