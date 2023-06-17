@@ -27,16 +27,21 @@ const Header: React.FC<HeaderProps> = ({
 				<Box height={'50%'} bg={'purple.900'}></Box>
 				<Flex justify={'center'} bg={'white'} flexGrow={1}>
 					<Flex width={'95%'} maxWidth={'800px'}>
-						{communityData.imageURL ? (
+						{communityStateValue.currentCommunity
+							?.imageURL ? (
 							<Image
 								borderRadius="full"
 								boxSize="66px"
-								src="/images/logo.png"
+								src={
+									communityStateValue.currentCommunity
+										?.imageURL
+								}
 								alt="Dan Abramov"
 								position="relative"
 								top={-3}
 								color="blue.500"
-								border="4px solid white"
+									border="4px solid white"
+									objectFit={'cover'}
 							/>
 						) : (
 							<Image
