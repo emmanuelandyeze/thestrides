@@ -24,11 +24,17 @@ const Navbar: React.FC = () => {
 					alt=""
 					height={'46px'}
 					objectFit={'cover'}
+					display={{
+						base: 'flex',
+						md: 'none',
+						lg: 'none',
+						xl: 'none',
+					}}
 				/>
 				<Image
 					src="/images/text.png"
 					alt=""
-					height={'15px'}
+					height={'18px'}
 					mr={2}
 					display={{
 						base: 'none',

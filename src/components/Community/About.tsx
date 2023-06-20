@@ -70,7 +70,7 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 					<Flex
 						justify="space-between"
 						align="center"
-						bg="purple.900"
+						bg="gray.500"
 						color="white"
 						p={3}
 						borderRadius="4px 4px 0px 0px"
@@ -130,7 +130,11 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 								)}
 							</Flex>
 							<Link href={`/c/${communityData.id}/submit`}>
-								<Button mt={3} height="30px">
+								<Button
+									mt={3}
+									bg={'gray.500'}
+									height="30px"
+								>
 									Create Post
 								</Button>
 							</Link>
@@ -138,7 +142,7 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 								<>
 									<Divider />
 									<Stack spacing={1} fontSize="10pt">
-										<Text fontWeight={600}>Admin</Text>
+										<Text fontWeight={600} color={'gray.800'}>Admin</Text>
 										<Flex
 											align="center"
 											justify="space-between"
@@ -165,6 +169,7 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 													borderRadius="full"
 													boxSize="40px"
 													alt="Community Image"
+													objectFit={'cover'}
 												/>
 											) : (
 												<Icon

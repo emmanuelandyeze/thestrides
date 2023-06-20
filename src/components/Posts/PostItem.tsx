@@ -29,7 +29,11 @@ type PostItemProps = {
 	post: Post;
 	userIsCreator: boolean;
 	userVoteValue?: number;
-	onVote: () => {};
+	onVote: (
+		post: Post,
+		vote: number,
+		communityId: string,
+	) => void;
 	onDeletePost: (post: Post) => Promise<boolean>;
 	onSelectPost: () => void;
 };
@@ -86,7 +90,10 @@ const PostItem: React.FC<PostItemProps> = ({
 							justify={'space-between'}
 						>
 							<Text>
-								Posted by u/{post.creatorDisplayName}{' '}
+								Posted by{' '}
+								<span style={{ color: 'blue' }}>
+									{post.creatorDisplayName}{' '}
+								</span>
 							</Text>
 							<Text>
 								{moment(
@@ -108,7 +115,6 @@ const PostItem: React.FC<PostItemProps> = ({
 										{post?.body}
 									</Text>
 								</VStack>
-								
 							</HStack>
 						) : (
 							<VStack align={'start'} width={'100%'}>
@@ -133,9 +139,10 @@ const PostItem: React.FC<PostItemProps> = ({
 										)}
 										<Image
 											src={post?.imageURL}
-											maxHeight={'460px'}
+											// maxHeight={'460px'}
 											objectFit={'cover'}
 											borderRadius={4}
+											width={'100%'}
 											display={
 												loadingImage ? 'none' : 'unset'
 											}
@@ -164,11 +171,13 @@ const PostItem: React.FC<PostItemProps> = ({
 							as={userVoteValue === 1 ? SlLike : SlLike}
 							color={
 								userVoteValue === 1
-									? 'brand.100'
+									? 'green.300'
 									: 'gray.400'
 							}
 							// fontSize={22}
-							onClick={onVote}
+							onClick={() =>
+								onVote(post, 1, post.communityId)
+							}
 						/>
 						<Text mx={2}>{post?.voteStatus}</Text>
 						<Icon
@@ -181,7 +190,7 @@ const PostItem: React.FC<PostItemProps> = ({
 									: 'gray.400'
 							}
 							// fontSize={22}
-							onClick={onVote}
+							onClick={() => onVote(post, -1, post.communityId)}
 						/>
 					</Flex>
 					<Flex
@@ -228,12 +237,12 @@ const PostItem: React.FC<PostItemProps> = ({
 						>
 							{loadingDelete ? (
 								<Spinner size={'sm'} />
-							): (
-									<>
+							) : (
+								<>
 									<Icon as={AiOutlineDelete} mr={2} />
-							<Text fontSize={'9pt'}>Delete</Text></>
+									<Text fontSize={'9pt'}>Delete</Text>
+								</>
 							)}
-							
 						</Flex>
 					)}
 				</Flex>

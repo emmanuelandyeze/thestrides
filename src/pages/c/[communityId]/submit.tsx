@@ -10,12 +10,9 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRecoilValue } from 'recoil';
 
 const SubmitPostPage: React.FC = () => {
-    const [user] = useAuthState(auth)
+	const [user] = useAuthState(auth)
+	const communityStateValue = useRecoilValue(communityState)
     
-		// const visitedCommunities = useRecoilValue(communityState).visitedCommunities;
-		const communityStateValue =
-			useRecoilValue(communityState);
-		const { loading } = useCommunityData();
 	return (
 		<PageContent>
 			<>

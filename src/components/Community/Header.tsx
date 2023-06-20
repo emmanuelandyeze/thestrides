@@ -24,19 +24,19 @@ const Header: React.FC<HeaderProps> = ({
 				width={'100%'}
 				height={'146px'}
 			>
-				<Box height={'50%'} bg={'purple.900'}></Box>
+				<Box height={'70%'} bg={'gray.500'}></Box>
 				<Flex justify={'center'} bg={'white'} flexGrow={1}>
 					<Flex width={'95%'} maxWidth={'800px'}>
 						{communityStateValue.currentCommunity
 							?.imageURL ? (
 							<Image
 								borderRadius="full"
-								boxSize="66px"
+								boxSize="86px"
 								src={
 									communityStateValue.currentCommunity
 										?.imageURL
 								}
-								alt="Dan Abramov"
+								alt=""
 								position="relative"
 								top={-3}
 								color="blue.500"
