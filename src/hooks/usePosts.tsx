@@ -23,6 +23,7 @@ import { ref, deleteObject } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { communityState } from '../atoms/communitiesAtom';
 import { AuthModalState } from '../atoms/authModalAtom';
+import { useRouter } from 'next/router';
 
 const usePosts = () => {
 	const [user] = useAuthState(auth);
@@ -31,6 +32,7 @@ const usePosts = () => {
 	const currentCommunity =
 		useRecoilValue(communityState).currentCommunity;
 	const setAuthModalState = useSetRecoilState(AuthModalState)
+	const router = useRouter()
 
 	const onVote = async (
 		post: Post,
@@ -107,10 +109,7 @@ const usePosts = () => {
 				}
 			}
 
-			const postRef = doc(firestore, 'posts', post.id!);
-			batch.update(postRef, {
-				voteStatus: voteStatus + voteChange,
-			});
+			
 
 			const postIdx = postStateValue.posts.findIndex(
 				(item) => item.id === post.id,
@@ -122,13 +121,31 @@ const usePosts = () => {
 				postVotes: updatedPostVotes,
 			}));
 
+			if (postStateValue.selectedPost) {
+				setPostStateValue(prev => ({
+					...prev,
+					selectedPost: updatedPost
+				}))
+			}
+
+			const postRef = doc(firestore, 'posts', post.id!);
+			batch.update(postRef, {
+				voteStatus: voteStatus + voteChange,
+			});
+
 			await batch.commit();
 		} catch (error) {
 			console.log('onvote', error);
 		}
 	};
 
-	const onSelectPost = async () => {};
+	const onSelectPost = async (post: Post) => {
+		setPostStateValue((prev) => ({
+			...prev,
+			selectedPost: post
+		}))
+		router.push(`/c/${post.communityId}/comments/${post.id}`)
+	};
 
 	const onDeletePost = async (
 		post: Post,

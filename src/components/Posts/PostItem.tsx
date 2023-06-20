@@ -11,6 +11,7 @@ import {
 	Spinner,
 } from '@chakra-ui/react';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { BsChat, BsDot } from 'react-icons/bs';
@@ -35,7 +36,7 @@ type PostItemProps = {
 		communityId: string,
 	) => void;
 	onDeletePost: (post: Post) => Promise<boolean>;
-	onSelectPost: () => void;
+	onSelectPost?: (post: Post) => void;
 };
 
 const PostItem: React.FC<PostItemProps> = ({
@@ -49,6 +50,8 @@ const PostItem: React.FC<PostItemProps> = ({
 	const [loadingImage, setLoadingImage] = useState(true);
 	const [loadingDelete, setLoadingDelete] = useState(false)
 	const [error, setError] = useState(false)
+	const router = useRouter()
+	const singlePostPage = !onSelectPost
 
 	const handleDelete = async () => {
 		setLoadingDelete(true)
@@ -58,6 +61,9 @@ const PostItem: React.FC<PostItemProps> = ({
 				throw new Error('Faled to delete Post')
 			}
 			console.log('Post was successfuly deleted')
+			if (singlePostPage) {
+				router.push(`/c/${post.communityId}`)
+			}
 		} catch (error: any) {
 			console.log(error)
 			setError(error.message)
@@ -78,8 +84,8 @@ const PostItem: React.FC<PostItemProps> = ({
 				<Flex
 					direction={'column'}
 					width={'100%'}
-					cursor={'pointer'}
-					onClick={() => {}}
+					cursor={singlePostPage ? 'unset' : 'pointer'}
+					onClick={() => onSelectPost && onSelectPost(post)}
 				>
 					<Stack spacing={1} p={'10px'}>
 						<Stack
@@ -111,9 +117,45 @@ const PostItem: React.FC<PostItemProps> = ({
 									<Text fontSize={'12pt'} fontWeight={600}>
 										{post?.title}
 									</Text>
-									<Text fontSize={'9pt'} fontWeight={400}>
-										{post?.body}
-									</Text>
+									{singlePostPage && post?.imageURL && (
+										<Flex
+											justify={'center'}
+											p={0}
+											flexGrow={1}
+										>
+											{loadingImage && (
+												<Skeleton
+													height="200px"
+													width={'100%'}
+													bg={'gray.200'}
+													borderRadius={4}
+												/>
+											)}
+											<Image
+												src={post?.imageURL}
+												// maxHeight={'460px'}
+												objectFit={'cover'}
+												borderRadius={4}
+												width={'100%'}
+												display={
+													loadingImage ? 'none' : 'unset'
+												}
+												onLoad={() =>
+													setLoadingImage(false)
+												}
+												alt="Post Image"
+											/>
+										</Flex>
+									)}
+									{singlePostPage ? (
+										<Text fontSize={'9pt'} fontWeight={400}>
+											{post?.body}
+										</Text>
+									) : (
+										<Text fontSize={'9pt'} fontWeight={400}>
+											{post?.body.slice(0, 250)}...
+										</Text>
+									)}
 								</VStack>
 							</HStack>
 						) : (
@@ -140,9 +182,11 @@ const PostItem: React.FC<PostItemProps> = ({
 										<Image
 											src={post?.imageURL}
 											// maxHeight={'460px'}
+											align={'center'}
 											objectFit={'cover'}
 											borderRadius={4}
 											width={'100%'}
+											height={'100%'}
 											display={
 												loadingImage ? 'none' : 'unset'
 											}
@@ -190,7 +234,9 @@ const PostItem: React.FC<PostItemProps> = ({
 									: 'gray.400'
 							}
 							// fontSize={22}
-							onClick={() => onVote(post, -1, post.communityId)}
+							onClick={() =>
+								onVote(post, -1, post.communityId)
+							}
 						/>
 					</Flex>
 					<Flex
