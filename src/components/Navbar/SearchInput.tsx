@@ -14,7 +14,7 @@ type SearchInputProps = {
 const SearchInput: React.FC<SearchInputProps> = () => {
 	return (
 		<Flex
-			width={{base: '80%', md: '50%'}}
+			width={{base: '50%', md: '50%'}}
 			// flexGrow={1}
 			mr={2}
 			align={'center'}

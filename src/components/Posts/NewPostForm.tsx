@@ -19,7 +19,7 @@ import useSelectFile from '@/src/hooks/useSelectFile';
 
 type NewPostFormProps = {
 	user: User;
-
+	communityImageURL?: string;
 };
 
 
@@ -47,7 +47,10 @@ const formTabs: TabItem[] = [
 ];
 
 
-const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
+const NewPostForm: React.FC<NewPostFormProps> = ({
+	user,
+	communityImageURL,
+}) => {
 	const router = useRouter();
 	const { communityId } = router.query;
 	const [selectedTab, setSelectedTab] = useState(
@@ -57,55 +60,68 @@ const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
 		title: '',
 		body: '',
 	});
-	const {selectedFile, setSelectedFile, onSelectFile} = useSelectFile()
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(false)
+	const { selectedFile, setSelectedFile, onSelectFile } =
+		useSelectFile();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 
 	const handleCreatePost = async () => {
 		const newPost: Post = {
 			communityId: communityId as string,
+			communityImageURL: communityImageURL || '',
 			creatorId: user.uid,
 			creatorDisplayName: user.email!.split('@')[0],
 			title: textInputs.title,
 			body: textInputs.body,
 			numberOfComments: 0,
 			voteStatus: 0,
-			createdAt: serverTimestamp() as Timestamp
-		}
+			createdAt: serverTimestamp() as Timestamp,
+		};
 
-		setLoading(true)
+		setLoading(true);
 		try {
-			const postDocRef = await addDoc(collection(firestore, "posts"), newPost)
+			const postDocRef = await addDoc(
+				collection(firestore, 'posts'),
+				newPost,
+			);
 
 			if (selectedFile) {
-				const imageRef = ref(storage, `posts/${postDocRef.id}/image`)
-				await uploadString(imageRef, selectedFile, 'data_url')
-				const downloadURL = await getDownloadURL(imageRef)
+				const imageRef = ref(
+					storage,
+					`posts/${postDocRef.id}/image`,
+				);
+				await uploadString(
+					imageRef,
+					selectedFile,
+					'data_url',
+				);
+				const downloadURL = await getDownloadURL(imageRef);
 
 				await updateDoc(postDocRef, {
-					imageURL: downloadURL
-				})
+					imageURL: downloadURL,
+				});
 			}
 			router.back();
 		} catch (error: any) {
-			console.log(error)
-			setError(true)
+			console.log(error);
+			setError(true);
 		}
 
-		setLoading(false)
-		
+		setLoading(false);
 	};
 
-	
-
 	const onTextChange = (
-	event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		event: React.ChangeEvent<
+			HTMLInputElement | HTMLTextAreaElement
+		>,
 	) => {
-		const { target: { name, value } } = event;
+		const {
+			target: { name, value },
+		} = event;
 		setTextInputs((prev) => ({
 			...prev,
-			[name]: value
-		}))
+			[name]: value,
+		}));
 	};
 
 	return (
@@ -144,7 +160,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
 				)}
 			</Flex>
 			{error && (
-				<Alert status='error'>
+				<Alert status="error">
 					<AlertIcon />
 					<Text mr={2}>Error creating post</Text>
 				</Alert>

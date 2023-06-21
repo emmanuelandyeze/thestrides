@@ -20,7 +20,7 @@ const Directory: React.FC = () => {
 		<Menu isOpen={directoryState.isOpen}>
 			<MenuButton
 				cursor="pointer"
-				padding="0px 6px"
+				padding={{ base: '0px', md: '0px 6px' }}
 				borderRadius={4}
 				mr={2}
 				ml={{ base: 0, md: 2 }}
@@ -44,9 +44,9 @@ const Directory: React.FC = () => {
 								borderRadius="full"
 								boxSize="24px"
 								mr={2}
-								alt=''
-								w={'full'}
+								alt=""
 								objectFit={'cover'}
+								onClick={toggleMenuOpen}
 							/>
 						) : (
 							<Icon
@@ -56,6 +56,7 @@ const Directory: React.FC = () => {
 								color={
 									directoryState.selectedMenuItem.iconColor
 								}
+								onClick={toggleMenuOpen}
 							/>
 						)}
 						<Flex display={{ base: 'none', lg: 'flex' }}>
@@ -67,7 +68,9 @@ const Directory: React.FC = () => {
 							</Text>
 						</Flex>
 					</Flex>
-					<ChevronDownIcon />
+					<Flex display={{ base: 'block', md: 'block' }}>
+						<ChevronDownIcon />
+					</Flex>
 				</Flex>
 			</MenuButton>
 			<MenuList>

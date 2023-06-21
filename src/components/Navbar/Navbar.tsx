@@ -22,9 +22,8 @@ const Navbar: React.FC = () => {
 			zIndex={50}
 			width={'100%'}
 		>
-			<Flex align={'center'} cursor={'pointer'} onClick={() => onSelectMenuItem(defaultMenuItem)}>
+			<Flex align={'center'} cursor={'pointer'}>
 				<Image
-					
 					src="/images/logo.png"
 					alt=""
 					height={'46px'}
@@ -35,9 +34,9 @@ const Navbar: React.FC = () => {
 						lg: 'none',
 						xl: 'none',
 					}}
+					onClick={() => onSelectMenuItem(defaultMenuItem)}
 				/>
 				<Image
-					
 					src="/images/text.png"
 					alt=""
 					height={'18px'}
@@ -48,9 +47,10 @@ const Navbar: React.FC = () => {
 						lg: 'none',
 						xl: 'flex',
 					}}
+					onClick={() => onSelectMenuItem(defaultMenuItem)}
 				/>
+				{user && <Directory />}
 			</Flex>
-			{user && <Directory />}
 
 			<SearchInput />
 			<RightContent user={user} />
