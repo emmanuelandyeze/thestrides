@@ -45,6 +45,8 @@ const Directory: React.FC = () => {
 								boxSize="24px"
 								mr={2}
 								alt=''
+								w={'full'}
+								objectFit={'cover'}
 							/>
 						) : (
 							<Icon

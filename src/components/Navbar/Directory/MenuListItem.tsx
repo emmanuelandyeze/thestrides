@@ -46,7 +46,8 @@ const MenuListItem: React.FC<MenuListItemProps> = ({
 						borderRadius="full"
 						boxSize="18px"
                         mr={2}
-                        alt=''
+						alt=''
+						objectFit={'cover'}
 					/>
 				) : (
 					<Icon

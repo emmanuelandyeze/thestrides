@@ -9,6 +9,8 @@ import {
 	VStack,
 	Skeleton,
 	Spinner,
+	Wrap,
+	WrapItem,
 } from '@chakra-ui/react';
 import moment from 'moment';
 import Link from 'next/link';
@@ -27,7 +29,7 @@ import {
 	IoBookmarkOutline,
 } from 'react-icons/io5';
 import { SlDislike, SlLike } from 'react-icons/sl';
- 
+
 type PostItemProps = {
 	post: Post;
 	userIsCreator: boolean;
@@ -49,31 +51,31 @@ const PostItem: React.FC<PostItemProps> = ({
 	onVote,
 	onDeletePost,
 	onSelectPost,
-	homePage
+	homePage,
 }) => {
 	const [loadingImage, setLoadingImage] = useState(true);
-	const [loadingDelete, setLoadingDelete] = useState(false)
-	const [error, setError] = useState(false)
-	const router = useRouter()
-	const singlePostPage = !onSelectPost
+	const [loadingDelete, setLoadingDelete] = useState(false);
+	const [error, setError] = useState(false);
+	const router = useRouter();
+	const singlePostPage = !onSelectPost;
 
 	const handleDelete = async () => {
-		setLoadingDelete(true)
+		setLoadingDelete(true);
 		try {
-			const success = await onDeletePost(post)
+			const success = await onDeletePost(post);
 			if (!success) {
-				throw new Error('Faled to delete Post')
+				throw new Error('Faled to delete Post');
 			}
-			console.log('Post was successfuly deleted')
+			console.log('Post was successfuly deleted');
 			if (singlePostPage) {
-				router.push(`/c/${post.communityId}`)
+				router.push(`/c/${post.communityId}`);
 			}
 		} catch (error: any) {
-			console.log(error)
-			setError(error.message)
+			console.log(error);
+			setError(error.message);
 		}
-		setLoadingDelete(false)
-	}
+		setLoadingDelete(false);
+	};
 
 	return (
 		<>
@@ -114,7 +116,7 @@ const PostItem: React.FC<PostItemProps> = ({
 												borderRadius="full"
 												boxSize="18px"
 												mr={2}
-												alt=''
+												alt=""
 											/>
 										) : (
 											<Icon
@@ -142,10 +144,7 @@ const PostItem: React.FC<PostItemProps> = ({
 										/>
 									</>
 								)}
-								<Text>
-									by {post.creatorDisplayName}{' '}
-									
-								</Text>
+								<Text>@{post.creatorDisplayName} </Text>
 							</Stack>
 							<Text>
 								{moment(
@@ -179,7 +178,7 @@ const PostItem: React.FC<PostItemProps> = ({
 											)}
 											<Image
 												src={post?.imageURL}
-												// maxHeight={'460px'}
+												height={'460px'}
 												objectFit={'cover'}
 												borderRadius={4}
 												width={'100%'}
@@ -194,13 +193,52 @@ const PostItem: React.FC<PostItemProps> = ({
 										</Flex>
 									)}
 									{singlePostPage ? (
-										<Text fontSize={'9pt'} fontWeight={400}>
-											{post?.body}
+										<Text fontSize={'9pt'} fontWeight={400} pt={5}>
+											<pre
+												style={{
+													width: '100%',
+													padding: 0,
+													margin: 0,
+													overflow: 'auto',
+													overflowY: 'hidden',
+													fontSize: '12px',
+													lineHeight: '20px',
+													whiteSpace: 'pre-wrap',
+													fontFamily:
+														'Open Sans, sans-serif',
+												}}
+											>
+												{post?.body}
+											</pre>
 										</Text>
 									) : (
-										<Text fontSize={'9pt'} fontWeight={400}>
-											{post?.body.slice(0, 250)}...
-										</Text>
+										<Wrap>
+											<WrapItem>
+												<Text
+													fontSize={'9pt'}
+													noOfLines={[1, 2, 3]}
+														fontWeight={400}
+														pt={5}
+												>
+													<pre
+														style={{
+															width: '100%',
+															padding: 0,
+															margin: 0,
+															overflow: 'auto',
+															overflowY: 'hidden',
+															fontSize: '12px',
+															lineHeight: '20px',
+															whiteSpace: 'pre-wrap',
+															fontFamily:
+																'Open Sans, sans-serif',
+														}}
+													>
+														{post?.body.slice(0, 250)}...
+													</pre>
+												</Text>
+											</WrapItem>
+										</Wrap>
 									)}
 								</VStack>
 							</HStack>
