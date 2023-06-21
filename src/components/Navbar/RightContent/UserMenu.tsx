@@ -66,11 +66,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
 						<Flex align={'center'}>
 							<>
 								<Image
-									src="https://firebasestorage.googleapis.com/v0/b/stridesconnect-864a1.appspot.com/o/profile%2Femmanuel.andyeze%2Fimage?alt=media&token=59ff9c8a-a8bf-467f-a372-eff4d8906d94"
+									src={user.photoURL as string}
 									alt=""
-										height={'40px'}
-										rounded={'full'}
-										objectFit={'cover'}
+									height={'40px'}
+									rounded={'full'}
+									objectFit={'cover'}
 									width={'40px'}
 									mr={1}
 									color={'gray.300'}
