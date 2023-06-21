@@ -143,7 +143,7 @@ const PostItem: React.FC<PostItemProps> = ({
 									</>
 								)}
 								<Text>
-									Posted by {post.creatorDisplayName}{' '}
+									by {post.creatorDisplayName}{' '}
 									
 								</Text>
 							</Stack>
