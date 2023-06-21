@@ -30,7 +30,7 @@ const CommunityPage: React.FC<communityPageProps> = ({
 			currentCommunity: communityData
 	}))
 	
-	}, [])
+	}, [communityData])
 	
 	if (!communityData) {
 		return <NotFound />;

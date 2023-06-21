@@ -17,6 +17,7 @@ import {
     Icon
 } from '@chakra-ui/react';
 import { doc, getDoc, runTransaction, serverTimestamp, setDoc } from 'firebase/firestore';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BsFillEyeFill, BsFillPersonFill } from 'react-icons/bs';
@@ -38,6 +39,7 @@ const CreateCommunityModal: React.FC<
 	const [charsRemaining, setCharsRemaining] = useState(50);
 		const [error, setError] = useState('')
 		const [loading, setLoading] = useState(false)
+		const router = useRouter()
 
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
@@ -113,6 +115,9 @@ const CreateCommunityModal: React.FC<
 					}
 				);
 			})
+
+			handleClose()
+			router.push(`c/${communityName}`)
 		
 			
 

@@ -22,9 +22,9 @@ const Header: React.FC<HeaderProps> = ({
 			<Flex
 				direction={'column'}
 				width={'100%'}
-				height={'146px'}
+				height={'186px'}
 			>
-				<Box height={'70%'} bg={'gray.500'}></Box>
+				<Box height={'100%'} bg={'gray.500'}></Box>
 				<Flex justify={'center'} bg={'white'} flexGrow={1}>
 					<Flex width={'95%'} maxWidth={'800px'}>
 						{communityStateValue.currentCommunity
