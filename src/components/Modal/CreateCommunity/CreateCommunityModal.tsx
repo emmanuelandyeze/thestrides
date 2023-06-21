@@ -117,7 +117,7 @@ const CreateCommunityModal: React.FC<
 			})
 
 			handleClose()
-			router.push(`c/${communityName}`)
+			router.push(`c/${communityHandle}`)
 		
 			
 
