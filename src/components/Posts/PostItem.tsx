@@ -218,7 +218,7 @@ const PostItem: React.FC<PostItemProps> = ({
 													fontSize={'9pt'}
 													noOfLines={[1, 2, 3]}
 														fontWeight={400}
-														pt={5}
+														pt={0}
 												>
 													<pre
 														style={{
