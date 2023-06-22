@@ -58,7 +58,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
 					border: '1px solid',
 					borderColor: 'black',
 				}}
-				height="100px"
+				height="400px"
 			/>
 			<Flex justify="flex-end">
 				{textInputs.title == '' ? (

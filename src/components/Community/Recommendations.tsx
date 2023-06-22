@@ -106,67 +106,77 @@ const Recommendations: React.FC = () => {
 										snippet.communityId === item.id,
 								);
 							return (
-								<Link key={item.id} href={`/c/${item.id}`}>
-									<Flex
-										position="relative"
-										align="center"
-										fontSize="10pt"
-										borderBottom="1px solid"
-										borderColor="gray.200"
-										p="10px 12px"
-									>
-										<Flex width="80%" align="center">
-											<Flex width="15%">
-												<Text>{index + 1}</Text>
-											</Flex>
-											<Flex align="center" width="80%">
-												{item.imageURL ? (
-													<Image
-														src={item.imageURL}
-														borderRadius="full"
-														boxSize="28px"
-														mr={2}
-														alt=''
-													/>
-												) : (
-													<Icon
-														as={IoIosPeople}
-														fontSize={30}
-														color="brand.100"
-														mr={2}
-													/>
-												)}
-												<span
-													style={{
-														whiteSpace: 'nowrap',
-														overflow: 'hidden',
-														textOverflow: 'ellipsis',
-													}}
-												>
-													{`c/${item.id}`}
-												</span>
-											</Flex>
-										</Flex>
-										<Box position="absolute" right="10px">
-											<Button
-												height="22px"
-												fontSize="8pt"
-												variant={
-													isJoined ? 'outline' : 'solid'
-												}
-												onClick={(event) => {
-													event.stopPropagation();
-													onJoinOrLeaveCommunity(
-														item,
-														isJoined,
-													);
-												}}
+								<>
+									{!isJoined && (
+										<Link
+											key={item.id}
+											href={`/c/${item.id}`}
+										>
+											<Flex
+												position="relative"
+												align="center"
+												fontSize="10pt"
+												borderBottom="1px solid"
+												borderColor="gray.200"
+												p="10px 12px"
 											>
-												{isJoined ? 'Joined' : 'Join'}
-											</Button>
-										</Box>
-									</Flex>
-								</Link>
+												<Flex width="80%" align="center">
+													{/* <Flex width="15%">
+														<Text>{index + 1}</Text>
+													</Flex> */}
+													<Flex align="center" width="80%">
+														{item.imageURL ? (
+															<Image
+																src={item.imageURL}
+																borderRadius="full"
+																boxSize="28px"
+																mr={2}
+																alt=""
+															/>
+														) : (
+															<Icon
+																as={IoIosPeople}
+																fontSize={30}
+																color="brand.100"
+																mr={2}
+															/>
+														)}
+														<span
+															style={{
+																whiteSpace: 'nowrap',
+																overflow: 'hidden',
+																textOverflow: 'ellipsis',
+															}}
+														>
+															{`c/${item.id}`}
+														</span>
+													</Flex>
+												</Flex>
+												<Box
+													position="absolute"
+													right="10px"
+												>
+													<Button
+														height="22px"
+														fontSize="8pt"
+														variant={
+															isJoined ? 'outline' : 'solid'
+														}
+														onClick={(event) => {
+															event.stopPropagation();
+															onJoinOrLeaveCommunity(
+																item,
+																isJoined,
+															);
+														}}
+													>
+														{isJoined ? 'Joined' : 'Join'}
+													</Button>
+												</Box>
+											</Flex>
+										</Link>
+									)}
+								</>
 							);
 						})}
 						<Box p="10px 20px">

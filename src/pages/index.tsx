@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react';
+import { Flex, Stack } from '@chakra-ui/react';
 import {
 	collection,
 	getDocs,
@@ -43,9 +43,11 @@ const Home: NextPage = () => {
 					communityStateValue.mySnippets.map(
 						(snippet) => snippet.communityId,
 					);
+				console.log(myCommunityIds)
 				const postQuery = query(
 					collection(firestore, 'posts'),
 					where('communityId', 'in', myCommunityIds),
+					orderBy('createdAt', 'desc'),
 					limit(10),
 				);
 				const postDocs = await getDocs(postQuery);
@@ -142,14 +144,17 @@ const Home: NextPage = () => {
 	}, [user, postStateValue.posts]);
 
   return (
-		<div style={{paddingTop: 45}}>
+		<div style={{ paddingTop: 45 }}>
 			<PageContent>
 				<>
-					<CreatePostLink />
+					{/* <CreatePostLink /> */}
 					{loading ? (
 						<PostLoader />
 					) : (
 						<Stack>
+							<Flex display={{base: 'block', md: 'none'}}>
+								<Recommendations />
+							</Flex>
 							{postStateValue.posts.map((post) => (
 								<PostItem
 									key={post.id}
