@@ -36,7 +36,7 @@ const PersonalHome: React.FC = () => {
 					<Icon
 						as={IoIosPeople}
 						fontSize={50}
-						color="brand.100"
+						color="gray.500"
 						mr={2}
 					/>
 					<Text fontWeight={600}>Home</Text>
@@ -45,8 +45,8 @@ const PersonalHome: React.FC = () => {
 					<Text fontSize="9pt">
 						Your personal Strides frontpage, built for you.
 					</Text>
-					<Button height="30px">Create Post</Button>
-					<Button variant="outline" height="30px">
+					<Button height="30px" bg={'gray.500'}>Create Post</Button>
+					<Button _hover={{bg: 'gray.500', color: 'white'}} borderColor={'gray.500'} bg={'white'} border={'.5px solid'} height="30px" color={'gray.500'}>
 						Create Community
 					</Button>
 				</Stack>

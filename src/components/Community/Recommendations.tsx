@@ -76,10 +76,10 @@ const Recommendations: React.FC = () => {
 				fontWeight={700}
 				bgImage="url(/images/recCommsArt.png)"
 				backgroundSize="cover"
-				bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
+				bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.50)),
         url('images/recCommsArt.png')"
 			>
-				Top Communities
+				Trending Communities
 			</Flex>
 			<Flex direction="column">
 				{loading ? (
@@ -179,11 +179,11 @@ const Recommendations: React.FC = () => {
 								</>
 							);
 						})}
-						<Box p="10px 20px">
-							<Button height="30px" width="100%">
+						{/* <Box p="10px 20px">
+							<Button height="30px" width="100%" bg={'gray.500'}>
 								View All
 							</Button>
-						</Box>
+						</Box> */}
 					</>
 				)}
 			</Flex>

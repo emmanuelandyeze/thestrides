@@ -1,4 +1,4 @@
-import { Flex, Stack } from '@chakra-ui/react';
+import { Box, Flex, Stack } from '@chakra-ui/react';
 import {
 	collection,
 	getDocs,
@@ -171,28 +171,33 @@ const Home: NextPage = () => {
 							<Flex display={{ base: 'block', md: 'none' }}>
 								<Recommendations />
 							</Flex>
-							{postStateValue.posts.map((post) => (
-								<PostItem
-									key={post.id}
-									post={post}
-									onSelectPost={onSelectPost}
-									onDeletePost={onDeletePost}
-									onVote={onVote}
-									userVoteValue={
-										postStateValue.postVotes.find(
-											(item) => item.postId === post.id,
-										)?.voteValue
-									}
-									userIsCreator={
-										user?.uid === post.creatorId
-									}
-									homePage
-								/>
-							))}
+							<Box
+								borderLeft={'.5px'}
+								borderColor={'gray.200'}
+							>
+								{postStateValue.posts.map((post) => (
+									<PostItem
+										key={post.id}
+										post={post}
+										onSelectPost={onSelectPost}
+										onDeletePost={onDeletePost}
+										onVote={onVote}
+										userVoteValue={
+											postStateValue.postVotes.find(
+												(item) => item.postId === post.id,
+											)?.voteValue
+										}
+										userIsCreator={
+											user?.uid === post.creatorId
+										}
+										homePage
+									/>
+								))}
+							</Box>
 						</Stack>
 					)}
 				</>
-				<Stack spacing={5}>
+				<Stack spacing={5} position="sticky" top="55px">
 					<Recommendations />
 					<Premium />
 					<PersonalHome />

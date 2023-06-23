@@ -80,11 +80,11 @@ const PostItem: React.FC<PostItemProps> = ({
 	return (
 		<>
 			<Flex
-				border={'1px solid'}
-				bg={'white'}
+				borderTop={'.5px solid'}
+				// bg={'white'}
 				borderColor={'gray.300'}
-				borderRadius={5}
-				_hover={{ shadow: 'md' }}
+				// borderRadius={5}
+				
 				direction={'column'}
 			>
 				<Flex
@@ -97,284 +97,336 @@ const PostItem: React.FC<PostItemProps> = ({
 						<Stack
 							direction={'row'}
 							spacing={0.6}
-							align={'center'}
+							// align={'center'}
 							fontSize={'9pt'}
 							justify={'space-between'}
 						>
 							<Stack
 								direction="row"
 								spacing={0.6}
-								align="center"
+								align="flex-start"
 								fontSize="9pt"
-							>
-								{/* Home Page Check */}
-								{homePage && (
-									<>
-										{post.communityImageURL ? (
-											<Image
-												src={post.communityImageURL}
-												borderRadius="full"
-												boxSize="18px"
-												mr={2}
-												alt=""
-											/>
-										) : (
-											<Icon
-												as={IoIosPeople}
-												fontSize="18pt"
-												mr={1}
-												color="blue.500"
-											/>
-										)}
-										<Link href={`c/${post.communityId}`}>
-											<Text
-												fontWeight={700}
-												_hover={{
-													textDecoration: 'underline',
-												}}
-												onClick={(event) =>
-													event.stopPropagation()
-												}
-											>{`${post.communityId}`}</Text>
-										</Link>
-										<Icon
-											as={BsDot}
-											color="gray.500"
-											fontSize={8}
-										/>
-									</>
-								)}
-								<Text>@{post.creatorDisplayName} </Text>
-							</Stack>
-							<Text>
-								{moment(
-									new Date(post.createdAt?.seconds * 1000),
-								).fromNow()}
-							</Text>
-						</Stack>
-						{post?.body ? (
-							<HStack
-								align={'start'}
 								width={'100%'}
-								justify={'space-between'}
 							>
-								<VStack align={'start'}>
-									<Text fontSize={'12pt'} fontWeight={600}>
-										{post?.title}
-									</Text>
-									{singlePostPage && post?.imageURL && (
-										<Flex
-											justify={'center'}
-											p={0}
-											flexGrow={1}
+								<Flex width={'8%'}>
+									{post.communityImageURL ? (
+										<Image
+											src={post.communityImageURL}
+											borderRadius="full"
+											// boxSize="28px"
+											// mr={2}
+											alt=""
+											objectFit={'cover'}
+											height={'30px'}
+											width={'30px'}
+										/>
+									) : (
+										<Icon
+											as={IoIosPeople}
+											fontSize="18pt"
+											mr={1}
+											color="blue.500"
+										/>
+									)}
+								</Flex>
+								<VStack
+									align={'flex-start'}
+									pt={1}
+									pl={2}
+									width={'90%'}
+								>
+									<HStack
+										align={'center'}
+										justify={'space-between'}
+									>
+										<Flex align={'center'}>
+											<Link href={`c/${post.communityId}`}>
+												<Text
+													fontWeight={700}
+													_hover={{
+														textDecoration: 'underline',
+													}}
+													onClick={(event) =>
+														event.stopPropagation()
+													}
+												>{`${post.communityId}`}</Text>
+											</Link>
+											<Icon
+												as={BsDot}
+												color="gray.500"
+												fontSize={8}
+											/>
+											<Text>
+												@{post.creatorDisplayName}{' '}
+											</Text>
+										</Flex>
+										<Text>
+											{moment(
+												new Date(
+													post.createdAt?.seconds * 1000,
+												),
+											).fromNow()}
+										</Text>
+									</HStack>
+									{post?.body ? (
+										<HStack
+											align={'start'}
+											width={'100%'}
+											justify={'space-between'}
 										>
-											{loadingImage && (
-												<Skeleton
-													height="200px"
-													width={'100%'}
-													bg={'gray.200'}
-													borderRadius={4}
-												/>
+											<VStack align={'start'}>
+												<Text
+													fontSize={'12pt'}
+													fontWeight={600}
+												>
+													{post?.title}
+												</Text>
+												{singlePostPage &&
+													post?.imageURL && (
+														<Flex
+															justify={'center'}
+															p={0}
+															flexGrow={1}
+														>
+															{loadingImage && (
+																<Skeleton
+																	height="200px"
+																	width={'100%'}
+																	bg={'gray.200'}
+																	borderRadius={4}
+																/>
+															)}
+															<Image
+																src={post?.imageURL}
+																height={'460px'}
+																objectFit={'cover'}
+																borderRadius={4}
+																width={'100%'}
+																display={
+																	loadingImage
+																		? 'none'
+																		: 'unset'
+																}
+																onLoad={() =>
+																	setLoadingImage(false)
+																}
+																alt="Post Image"
+															/>
+														</Flex>
+													)}
+												{singlePostPage ? (
+													<Text
+														fontSize={'9pt'}
+														fontWeight={400}
+														pt={5}
+													>
+														<pre
+															style={{
+																width: '100%',
+																padding: 0,
+																margin: 0,
+																overflow: 'auto',
+																overflowY: 'hidden',
+																fontSize: '12px',
+																lineHeight: '20px',
+																whiteSpace: 'pre-wrap',
+																fontFamily:
+																	'Open Sans, sans-serif',
+															}}
+														>
+															{post?.body}
+														</pre>
+													</Text>
+												) : (
+													<Wrap>
+														<WrapItem>
+															<Text
+																fontSize={'9pt'}
+																noOfLines={[1, 2, 3]}
+																fontWeight={400}
+																pt={0}
+															>
+																<pre
+																	style={{
+																		width: '100%',
+																		padding: 0,
+																		margin: 0,
+																		overflow: 'auto',
+																		overflowY: 'hidden',
+																		fontSize: '12px',
+																		lineHeight: '20px',
+																		whiteSpace: 'pre-wrap',
+																		fontFamily:
+																			'Open Sans, sans-serif',
+																	}}
+																>
+																	{post?.body.slice(0, 250)}
+																	...
+																</pre>
+															</Text>
+														</WrapItem>
+													</Wrap>
+												)}
+											</VStack>
+										</HStack>
+									) : (
+										<VStack align={'start'} width={'100%'}>
+											<VStack align={'start'}>
+												<Text
+													fontSize={'12pt'}
+													fontWeight={600}
+												>
+													{post?.title}
+												</Text>
+											</VStack>
+											{post?.imageURL && !post?.body && (
+												<Flex
+													justify={'center'}
+													p={0}
+													flexGrow={1}
+												>
+													{loadingImage && (
+														<Skeleton
+															height="200px"
+															width={'100%'}
+															bg={'gray.200'}
+															borderRadius={4}
+														/>
+													)}
+													<Image
+														src={post?.imageURL}
+														// maxHeight={'460px'}
+														align={'center'}
+														objectFit={'cover'}
+														borderRadius={4}
+														width={'100%'}
+														height={'100%'}
+														display={
+															loadingImage
+																? 'none'
+																: 'unset'
+														}
+														onLoad={() =>
+															setLoadingImage(false)
+														}
+														alt="Post Image"
+													/>
+												</Flex>
 											)}
-											<Image
-												src={post?.imageURL}
-												height={'460px'}
-												objectFit={'cover'}
-												borderRadius={4}
-												width={'100%'}
-												display={
-													loadingImage ? 'none' : 'unset'
+										</VStack>
+									)}
+									<Flex
+										pb={2}
+										pt={2}
+										justify={'space-between'}
+										direction={'row'}
+										
+										width={'100%'}
+									>
+										<Flex
+											align={'center'}
+											px={'0px'}
+											direction={'row'}
+										>
+											<Icon
+												as={
+													userVoteValue === 1
+														? SlLike
+														: SlLike
 												}
-												onLoad={() =>
-													setLoadingImage(false)
+												color={
+													userVoteValue === 1
+														? 'green.300'
+														: 'gray.400'
 												}
-												alt="Post Image"
+												// fontSize={22}
+												onClick={() =>
+													onVote(post, 1, post.communityId)
+												}
+											/>
+											<Text mx={2}>{post?.voteStatus}</Text>
+											<Icon
+												as={
+													userVoteValue === -1
+														? SlDislike
+														: SlDislike
+												}
+												color={
+													userVoteValue === -1
+														? 'red.500'
+														: 'gray.400'
+												}
+												// fontSize={22}
+												onClick={() =>
+													onVote(post, -1, post.communityId)
+												}
 											/>
 										</Flex>
-									)}
-									{singlePostPage ? (
-										<Text fontSize={'9pt'} fontWeight={400} pt={5}>
-											<pre
-												style={{
-													width: '100%',
-													padding: 0,
-													margin: 0,
-													overflow: 'auto',
-													overflowY: 'hidden',
-													fontSize: '12px',
-													lineHeight: '20px',
-													whiteSpace: 'pre-wrap',
-													fontFamily:
-														'Open Sans, sans-serif',
-												}}
-											>
-												{post?.body}
-											</pre>
-										</Text>
-									) : (
-										<Wrap>
-											<WrapItem>
-												<Text
-													fontSize={'9pt'}
-													noOfLines={[1, 2, 3]}
-														fontWeight={400}
-														pt={0}
-												>
-													<pre
-														style={{
-															width: '100%',
-															padding: 0,
-															margin: 0,
-															overflow: 'auto',
-															overflowY: 'hidden',
-															fontSize: '12px',
-															lineHeight: '20px',
-															whiteSpace: 'pre-wrap',
-															fontFamily:
-																'Open Sans, sans-serif',
-														}}
-													>
-														{post?.body.slice(0, 250)}...
-													</pre>
-												</Text>
-											</WrapItem>
-										</Wrap>
-									)}
-								</VStack>
-							</HStack>
-						) : (
-							<VStack align={'start'} width={'100%'}>
-								<VStack align={'start'}>
-									<Text fontSize={'12pt'} fontWeight={600}>
-										{post?.title}
-									</Text>
-								</VStack>
-								{post?.imageURL && !post?.body && (
-									<Flex
-										justify={'center'}
-										p={0}
-										flexGrow={1}
-									>
-										{loadingImage && (
-											<Skeleton
-												height="200px"
-												width={'100%'}
-												bg={'gray.200'}
-												borderRadius={4}
-											/>
-										)}
-										<Image
-											src={post?.imageURL}
-											// maxHeight={'460px'}
+										<Flex
 											align={'center'}
-											objectFit={'cover'}
+											p={'0px 10px'}
 											borderRadius={4}
-											width={'100%'}
-											height={'100%'}
-											display={
-												loadingImage ? 'none' : 'unset'
-											}
-											onLoad={() => setLoadingImage(false)}
-											alt="Post Image"
-										/>
+											_hover={{ bg: 'gray.200' }}
+											cursor={'pointer'}
+										>
+											<Icon as={BsChat} mr={2} />
+											<Text fontSize={'9pt'}>
+												{post.numberOfComments}
+											</Text>
+										</Flex>
+										<Flex
+											align={'center'}
+											p={'0px 10px'}
+											borderRadius={4}
+											_hover={{ bg: 'gray.200' }}
+											cursor={'pointer'}
+										>
+											<Icon
+												as={IoArrowRedoOutline}
+												mr={2}
+											/>
+											<Text fontSize={'9pt'}>Share</Text>
+										</Flex>
+										<Flex
+											align={'center'}
+											p={'0px 10px'}
+											borderRadius={4}
+											_hover={{ bg: 'gray.200' }}
+											cursor={'pointer'}
+										>
+											<Icon as={IoBookmarkOutline} mr={2} />
+											<Text fontSize={'9pt'}>Save</Text>
+										</Flex>
+										{userIsCreator && (
+											<Flex
+												align={'center'}
+												p={'0px 10px'}
+												borderRadius={4}
+												_hover={{ bg: 'gray.200' }}
+												cursor={'pointer'}
+												color={'red.600'}
+												onClick={handleDelete}
+											>
+												{loadingDelete ? (
+													<Spinner size={'sm'} />
+												) : (
+													<>
+														<Icon
+															as={AiOutlineDelete}
+															mr={2}
+														/>
+														<Text fontSize={'9pt'}>
+															Delete
+														</Text>
+													</>
+												)}
+											</Flex>
+										)}
 									</Flex>
-								)}
-							</VStack>
-						)}
+								</VStack>
+							</Stack>
+						</Stack>
 					</Stack>
-				</Flex>
-				<Flex
-					pb={2}
-					pt={2}
-					justify={'flex-start'}
-					direction={'row'}
-					px={3}
-				>
-					<Flex
-						align={'center'}
-						px={'10px'}
-						direction={'row'}
-					>
-						<Icon
-							as={userVoteValue === 1 ? SlLike : SlLike}
-							color={
-								userVoteValue === 1
-									? 'green.300'
-									: 'gray.400'
-							}
-							// fontSize={22}
-							onClick={() =>
-								onVote(post, 1, post.communityId)
-							}
-						/>
-						<Text mx={2}>{post?.voteStatus}</Text>
-						<Icon
-							as={
-								userVoteValue === -1 ? SlDislike : SlDislike
-							}
-							color={
-								userVoteValue === -1
-									? 'red.500'
-									: 'gray.400'
-							}
-							// fontSize={22}
-							onClick={() =>
-								onVote(post, -1, post.communityId)
-							}
-						/>
-					</Flex>
-					<Flex
-						align={'center'}
-						p={'0px 10px'}
-						borderRadius={4}
-						_hover={{ bg: 'gray.200' }}
-						cursor={'pointer'}
-					>
-						<Icon as={BsChat} mr={2} />
-						<Text fontSize={'9pt'}>
-							{post.numberOfComments}
-						</Text>
-					</Flex>
-					<Flex
-						align={'center'}
-						p={'0px 10px'}
-						borderRadius={4}
-						_hover={{ bg: 'gray.200' }}
-						cursor={'pointer'}
-					>
-						<Icon as={IoArrowRedoOutline} mr={2} />
-						<Text fontSize={'9pt'}>Share</Text>
-					</Flex>
-					<Flex
-						align={'center'}
-						p={'0px 10px'}
-						borderRadius={4}
-						_hover={{ bg: 'gray.200' }}
-						cursor={'pointer'}
-					>
-						<Icon as={IoBookmarkOutline} mr={2} />
-						<Text fontSize={'9pt'}>Save</Text>
-					</Flex>
-					{userIsCreator && (
-						<Flex
-							align={'center'}
-							p={'0px 10px'}
-							borderRadius={4}
-							_hover={{ bg: 'gray.200' }}
-							cursor={'pointer'}
-							color={'red.600'}
-							onClick={handleDelete}
-						>
-							{loadingDelete ? (
-								<Spinner size={'sm'} />
-							) : (
-								<>
-									<Icon as={AiOutlineDelete} mr={2} />
-									<Text fontSize={'9pt'}>Delete</Text>
-								</>
-							)}
-						</Flex>
-					)}
 				</Flex>
 			</Flex>
 		</>

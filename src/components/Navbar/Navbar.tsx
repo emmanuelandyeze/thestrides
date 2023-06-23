@@ -17,10 +17,12 @@ const Navbar: React.FC = () => {
 			bg="white"
 			height={'50px'}
 			justifyContent={'space-between'}
-			padding={'6px 12px 5px 5px'}
+			padding={'12px 12px 12px 5px'}
 			position={'fixed'}
 			zIndex={50}
 			width={'100%'}
+			borderBottom={'.5px solid'}
+			borderColor={'gray.200'}
 		>
 			<Flex align={'center'} cursor={'pointer'}>
 				<Image

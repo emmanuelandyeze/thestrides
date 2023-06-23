@@ -23,7 +23,7 @@ const Premium: React.FC = () => {
 				<Icon
 					as={GiCheckedShield}
 					fontSize={26}
-					color="brand.100"
+					color="gray.500"
 					mt={2}
 				/>
 				<Stack spacing={1} fontSize="9pt" pl={2}>
@@ -33,7 +33,7 @@ const Premium: React.FC = () => {
 					</Text>
 				</Stack>
 			</Flex>
-			<Button height="30px" bg="brand.100">
+			<Button height="30px" bg="gray.500">
 				Try Now
 			</Button>
 		</Flex>

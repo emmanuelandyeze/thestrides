@@ -66,7 +66,13 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 
     return (
 			<>
-				<Box position="sticky" top="55px">
+				<Box
+					position="sticky"
+					top="55px"
+					border={'.5px solid'}
+					borderColor={'gray.200'}
+					borderRadius="4px"
+				>
 					<Flex
 						justify="space-between"
 						align="center"
@@ -142,7 +148,12 @@ const About:React.FC<AboutProps> = ({communityData}) => {
 								<>
 									<Divider />
 									<Stack spacing={1} fontSize="10pt">
-										<Text fontWeight={600} color={'gray.800'}>Admin</Text>
+										<Text
+											fontWeight={600}
+											color={'gray.800'}
+										>
+											Admin
+										</Text>
 										<Flex
 											align="center"
 											justify="space-between"
