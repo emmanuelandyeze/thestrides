@@ -285,7 +285,7 @@ const PostItem: React.FC<PostItemProps> = ({
 															)}
 															<Image
 																src={post?.imageURL}
-																height={'260px'}
+																height={'230px'}
 																objectFit={'contain'}
 																borderRadius={4}
 																width={'100%'}
