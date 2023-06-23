@@ -21,6 +21,7 @@ import PostLoader from '../components/Posts/PostLoader';
 import { auth, firestore } from '../firebase/clientApp';
 import useCommunityData from '../hooks/useCommunityData';
 import usePosts from '../hooks/usePosts';
+import { NextSeo } from 'next-seo';
 
 const Home: NextPage = () => {
 	const [user, loadingUser] = useAuthState(auth);
@@ -145,6 +146,21 @@ const Home: NextPage = () => {
 
   return (
 		<div style={{ paddingTop: 45 }}>
+			<NextSeo
+				title="The Strides - One platform, many communities, one goal."
+				description="Discover communities right for you, engage and grow."
+				openGraph={{
+					type: 'website',
+					locale: 'en_IE',
+					url: 'https://www.thestrides.com.ng/',
+					siteName: 'The Strides',
+				}}
+				twitter={{
+					handle: '@stridesconnect',
+					site: '@stridesconnect',
+					cardType: 'summary_large_image',
+				}}
+			/>
 			<PageContent>
 				<>
 					{/* <CreatePostLink /> */}
@@ -152,7 +168,7 @@ const Home: NextPage = () => {
 						<PostLoader />
 					) : (
 						<Stack>
-							<Flex display={{base: 'block', md: 'none'}}>
+							<Flex display={{ base: 'block', md: 'none' }}>
 								<Recommendations />
 							</Flex>
 							{postStateValue.posts.map((post) => (

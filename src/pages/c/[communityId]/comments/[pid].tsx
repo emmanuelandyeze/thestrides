@@ -9,6 +9,7 @@ import usePosts from '@/src/hooks/usePosts';
 import { Box } from '@chakra-ui/react';
 import { User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -50,6 +51,34 @@ const PostPage: React.FC = () => {
 
 	return (
 		<>
+			
+			<NextSeo
+				title={`${postStateValue.selectedPost?.title} on The Strides`}
+				description="Discover communities right for you, engage and grow."
+				openGraph={{
+					title: `${postStateValue.selectedPost?.title} - The Strides`,
+					description: `${postStateValue.selectedPost?.body} - The Strides`,
+					url: `https://www.thestrides.com.ng/c/${postStateValue.selectedPost?.communityId}/comments/${postStateValue.selectedPost?.id}`,
+					type: 'article',
+					article: {
+						publishedTime: '2017-06-21T23:04:13Z',
+						modifiedTime: '2018-01-21T18:04:43Z',
+						expirationTime: '2022-12-21T22:04:11Z',
+						section: 'Section II',
+						authors: [
+							`${postStateValue.selectedPost?.creatorDisplayName}`,
+						],
+					},
+					images: [
+						{
+							url: `${postStateValue.selectedPost?.imageURL}`,
+							width: 850,
+							height: 650,
+							alt: 'Post Photo',
+						},
+					],
+				}}
+			/>
 			<div style={{ paddingTop: 45 }}>
 				<PageContent>
 					<>

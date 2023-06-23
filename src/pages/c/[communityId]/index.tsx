@@ -12,6 +12,8 @@ import {
 	GetServerSideProps,
 	GetServerSidePropsContext,
 } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import safeJsonStringify from 'safe-json-stringify';
@@ -24,6 +26,9 @@ const CommunityPage: React.FC<communityPageProps> = ({
 	communityData,
 }) => {
 	const setCommunityStateValue = useSetRecoilState(communityState)
+	const router = useRouter()
+
+	const { communityId } = router.query;
 	useEffect(() => {
 		setCommunityStateValue((prev) => ({
 			...prev,
@@ -36,11 +41,29 @@ const CommunityPage: React.FC<communityPageProps> = ({
 		return <NotFound />;
 	}
 	return (
-		<div style={{paddingTop: '3rem'}}>
+		<div style={{ paddingTop: '3rem' }}>
+			<NextSeo
+				title={`${communityData.communityName} Community - The Strides`}
+				description="Discover communities right for you, engage and grow."
+				openGraph={{
+					type: 'website',
+					locale: 'en_IE',
+					url: `https://www.thestrides.com.ng/c/${communityId}`,
+					siteName: 'The Strides',
+				}}
+				twitter={{
+					handle: '@stridesconnect',
+					site: '@stridesconnect',
+					cardType: 'summary_large_image',
+				}}
+			/>
 			<Header communityData={communityData} />
 			<PageContent>
 				<>
-					<Flex display={{base: 'block', md: 'none'}} mb={2}>
+					<Flex
+						display={{ base: 'block', md: 'none' }}
+						mb={2}
+					>
 						<About communityData={communityData} />
 					</Flex>
 					{/* <CreatePostLink /> */}

@@ -135,7 +135,7 @@ const PostItem: React.FC<PostItemProps> = ({
 												onClick={(event) =>
 													event.stopPropagation()
 												}
-											>{`c/${post.communityId}`}</Text>
+											>{`${post.communityId}`}</Text>
 										</Link>
 										<Icon
 											as={BsDot}
