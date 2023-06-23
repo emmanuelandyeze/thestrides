@@ -68,10 +68,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
 								<Image
 									src={user.photoURL as string}
 									alt=""
-									height={'40px'}
+									height={'30px'}
 									rounded={'full'}
 									objectFit={'cover'}
-									width={'40px'}
+									width={'30px'}
 									mr={1}
 									color={'gray.300'}
 								/>

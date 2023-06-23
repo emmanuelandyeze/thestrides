@@ -35,7 +35,12 @@ const Header: React.FC<HeaderProps> = ({
 					<Flex
 						width={'95%'}
 						maxWidth={'800px'}
-						borderBottom={{ base: '.5px solid', md: 'none' }}
+						borderBottom={{
+							base: '.5px solid',
+							md: 'none',
+						}}
+						borderColor={'white'}
+						bg={'gray.200'}
 						pb={2}
 					>
 						{communityStateValue.currentCommunity
@@ -53,6 +58,8 @@ const Header: React.FC<HeaderProps> = ({
 								color="blue.500"
 								border="4px solid white"
 								objectFit={'cover'}
+									bg={'gray.200'}
+									shadow={'md'}
 							/>
 						) : (
 							<Image
@@ -64,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({
 								top={-3}
 								color="blue.500"
 								border="4px solid white"
-								bg={'white'}
+								bg={'gray.200'}
 								shadow={'md'}
 							/>
 						)}
@@ -76,9 +83,17 @@ const Header: React.FC<HeaderProps> = ({
 								<Text
 									fontWeight={600}
 									fontSize={'10pt'}
+									color={'gray.600'}
+									fontStyle={'italic'}
+								>
+									@{communityData.id}
+								</Text>
+								<Text
+									fontWeight={600}
+									fontSize={'10pt'}
 									color={'gray.400'}
 								>
-									c/{communityData.id}
+									{communityData.numberOfMembers} Members
 								</Text>
 							</Flex>
 							<Flex>

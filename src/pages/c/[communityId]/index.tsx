@@ -76,6 +76,7 @@ const CommunityPage: React.FC<communityPageProps> = ({
 								position={'fixed'}
 								bottom={5}
 								right={5}
+								shadow={'md'}
 							>
 								<Text
 									textAlign={'center'}

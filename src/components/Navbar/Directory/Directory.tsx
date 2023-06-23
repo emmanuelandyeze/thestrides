@@ -42,7 +42,7 @@ const Directory: React.FC = () => {
 									directoryState.selectedMenuItem.imageURL
 								}
 								borderRadius="full"
-								boxSize="24px"
+								boxSize="30px"
 								mr={2}
 								alt=""
 								objectFit={'cover'}

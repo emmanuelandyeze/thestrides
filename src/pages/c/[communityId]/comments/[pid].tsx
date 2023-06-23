@@ -6,10 +6,11 @@ import PostItem from '@/src/components/Posts/PostItem';
 import { auth, firestore } from '@/src/firebase/clientApp';
 import useCommunityData from '@/src/hooks/useCommunityData';
 import usePosts from '@/src/hooks/usePosts';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -51,9 +52,8 @@ const PostPage: React.FC = () => {
 
 	return (
 		<>
-			
 			<NextSeo
-				title={`${postStateValue.selectedPost?.title} on The Strides`}
+				title={`Check out this post in @${postStateValue.selectedPost?.communityId} on The Strides`}
 				description="Discover communities right for you, engage and grow."
 				openGraph={{
 					title: `${postStateValue.selectedPost?.title} - The Strides`,
@@ -61,10 +61,6 @@ const PostPage: React.FC = () => {
 					url: `https://www.thestrides.com.ng/c/${postStateValue.selectedPost?.communityId}/comments/${postStateValue.selectedPost?.id}`,
 					type: 'article',
 					article: {
-						publishedTime: '2017-06-21T23:04:13Z',
-						modifiedTime: '2018-01-21T18:04:43Z',
-						expirationTime: '2022-12-21T22:04:11Z',
-						section: 'Section II',
 						authors: [
 							`${postStateValue.selectedPost?.creatorDisplayName}`,
 						],
@@ -87,11 +83,34 @@ const PostPage: React.FC = () => {
 							mb={3}
 						>
 							{communityStateValue.currentCommunity && (
-								<About
-									communityData={
-										communityStateValue.currentCommunity
-									}
-								/>
+								// <About
+								// 	communityData={
+								// 		communityStateValue.currentCommunity
+								// 	}
+								// />
+								<Link
+									href={`/c/${communityStateValue.currentCommunity.id}/submit`}
+								>
+									<Box
+										color={'white'}
+										bg={'purple.900'}
+										w={'45px'}
+										borderRadius={'full'}
+										py={1}
+										position={'fixed'}
+										bottom={5}
+										right={5}
+										shadow={'md'}
+									>
+										<Text
+											textAlign={'center'}
+											fontWeight={'bold'}
+											fontSize={'24px'}
+										>
+											+
+										</Text>
+									</Box>
+								</Link>
 							)}
 						</Box>
 						{postStateValue.selectedPost && (
