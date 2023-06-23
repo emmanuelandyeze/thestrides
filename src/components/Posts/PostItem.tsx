@@ -84,7 +84,7 @@ const PostItem: React.FC<PostItemProps> = ({
 				// bg={'white'}
 				borderColor={'gray.300'}
 				// borderRadius={5}
-				
+
 				direction={'column'}
 			>
 				<Flex
@@ -181,40 +181,40 @@ const PostItem: React.FC<PostItemProps> = ({
 												>
 													{post?.title}
 												</Text>
-												{singlePostPage &&
-													post?.imageURL && (
-														<Flex
-															justify={'center'}
-															p={0}
-															flexGrow={1}
-														>
-															{loadingImage && (
-																<Skeleton
-																	height="200px"
-																	width={'100%'}
-																	bg={'gray.200'}
-																	borderRadius={4}
-																/>
-															)}
-															<Image
-																src={post?.imageURL}
-																height={'460px'}
-																objectFit={'cover'}
-																borderRadius={4}
+												{singlePostPage && post?.imageURL && (
+													<Flex
+														justify={'center'}
+														p={0}
+														flexGrow={1}
+														borderRadius={6}
+													>
+														{loadingImage && (
+															<Skeleton
+																height="200px"
 																width={'100%'}
-																display={
-																	loadingImage
-																		? 'none'
-																		: 'unset'
-																}
-																onLoad={() =>
-																	setLoadingImage(false)
-																}
-																alt="Post Image"
+																bg={'gray.200'}
+																borderRadius={4}
 															/>
-														</Flex>
-													)}
-												{singlePostPage ? (
+														)}
+														<Image
+															src={post?.imageURL}
+															height={'260px'}
+															objectFit={'contain'}
+															borderRadius={4}
+															width={'100%'}
+															display={
+																loadingImage
+																	? 'none'
+																	: 'unset'
+															}
+															onLoad={() =>
+																setLoadingImage(false)
+															}
+															alt="Post Image"
+														/>
+													</Flex>
+												)}
+												{singlePostPage && post.imageURL ? (
 													<Text
 														fontSize={'9pt'}
 														fontWeight={400}
@@ -260,13 +260,47 @@ const PostItem: React.FC<PostItemProps> = ({
 																			'Open Sans, sans-serif',
 																	}}
 																>
-																	{post?.body.slice(0, 250)}
+																	{post?.body.slice(0, 200)}
 																	...
 																</pre>
 															</Text>
 														</WrapItem>
 													</Wrap>
 												)}
+												{!singlePostPage &&
+													post?.imageURL && (
+														<Flex
+															justify={'center'}
+															p={0}
+															flexGrow={1}
+															borderRadius={6}
+														>
+															{loadingImage && (
+																<Skeleton
+																	height="200px"
+																	width={'100%'}
+																	bg={'gray.200'}
+																	borderRadius={4}
+																/>
+															)}
+															<Image
+																src={post?.imageURL}
+																height={'260px'}
+																objectFit={'contain'}
+																borderRadius={4}
+																width={'100%'}
+																display={
+																	loadingImage
+																		? 'none'
+																		: 'unset'
+																}
+																onLoad={() =>
+																	setLoadingImage(false)
+																}
+																alt="Post Image"
+															/>
+														</Flex>
+													)}
 											</VStack>
 										</HStack>
 									) : (
@@ -320,7 +354,6 @@ const PostItem: React.FC<PostItemProps> = ({
 										pt={2}
 										justify={'space-between'}
 										direction={'row'}
-										
 										width={'100%'}
 									>
 										<Flex
