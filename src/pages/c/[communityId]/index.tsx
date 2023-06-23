@@ -6,13 +6,14 @@ import NotFound from '@/src/components/Community/NotFound';
 import PageContent from '@/src/components/Layout/PageContent';
 import Posts from '@/src/components/Posts/Posts';
 import { firestore } from '@/src/firebase/clientApp';
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import { doc, getDoc } from 'firebase/firestore';
 import {
 	GetServerSideProps,
 	GetServerSidePropsContext,
 } from 'next';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -64,7 +65,27 @@ const CommunityPage: React.FC<communityPageProps> = ({
 						display={{ base: 'block', md: 'none' }}
 						mb={2}
 					>
-						<About communityData={communityData} />
+						{/* <About communityData={communityData} /> */}
+						<Link href={`/c/${communityData.id}/submit`}>
+							<Box
+								color={'white'}
+								bg={'purple.900'}
+								w={'45px'}
+								borderRadius={'full'}
+								py={1}
+								position={'fixed'}
+								bottom={5}
+								right={5}
+							>
+								<Text
+									textAlign={'center'}
+									fontWeight={'bold'}
+									fontSize={'24px'}
+								>
+									+
+								</Text>
+							</Box>
+						</Link>
 					</Flex>
 					{/* <CreatePostLink /> */}
 					<Posts communityData={communityData} />
