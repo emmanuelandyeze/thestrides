@@ -16,7 +16,7 @@ import moment from 'moment';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiFillLike, AiOutlineDelete, AiOutlineLike } from 'react-icons/ai';
 import { BsChat, BsDot } from 'react-icons/bs';
 import { FaReddit } from 'react-icons/fa';
 import { IoIosPeople } from 'react-icons/io';
@@ -181,39 +181,40 @@ const PostItem: React.FC<PostItemProps> = ({
 												>
 													{post?.title}
 												</Text>
-												{singlePostPage && post?.imageURL && (
-													<Flex
-														justify={'center'}
-														p={0}
-														flexGrow={1}
-														borderRadius={6}
-													>
-														{loadingImage && (
-															<Skeleton
-																height="200px"
-																width={'100%'}
-																bg={'gray.200'}
+												{singlePostPage &&
+													post?.imageURL && (
+														<Flex
+															justify={'center'}
+															p={0}
+															flexGrow={1}
+															borderRadius={6}
+														>
+															{loadingImage && (
+																<Skeleton
+																	height="200px"
+																	width={'100%'}
+																	bg={'gray.200'}
+																	borderRadius={4}
+																/>
+															)}
+															<Image
+																src={post?.imageURL}
+																height={'260px'}
+																objectFit={'contain'}
 																borderRadius={4}
+																width={'100%'}
+																display={
+																	loadingImage
+																		? 'none'
+																		: 'unset'
+																}
+																onLoad={() =>
+																	setLoadingImage(false)
+																}
+																alt="Post Image"
 															/>
-														)}
-														<Image
-															src={post?.imageURL}
-															height={'260px'}
-															objectFit={'contain'}
-															borderRadius={4}
-															width={'100%'}
-															display={
-																loadingImage
-																	? 'none'
-																	: 'unset'
-															}
-															onLoad={() =>
-																setLoadingImage(false)
-															}
-															alt="Post Image"
-														/>
-													</Flex>
-												)}
+														</Flex>
+													)}
 												{singlePostPage && post.imageURL ? (
 													<Text
 														fontSize={'9pt'}
@@ -364,21 +365,21 @@ const PostItem: React.FC<PostItemProps> = ({
 											<Icon
 												as={
 													userVoteValue === 1
-														? SlLike
-														: SlLike
+														? AiFillLike
+														: AiOutlineLike
 												}
 												color={
 													userVoteValue === 1
-														? 'green.300'
+														? 'purple.500'
 														: 'gray.400'
 												}
-												// fontSize={22}
+												fontSize={22}
 												onClick={() =>
 													onVote(post, 1, post.communityId)
 												}
 											/>
 											<Text mx={2}>{post?.voteStatus}</Text>
-											<Icon
+											{/* <Icon
 												as={
 													userVoteValue === -1
 														? SlDislike
@@ -393,7 +394,7 @@ const PostItem: React.FC<PostItemProps> = ({
 												onClick={() =>
 													onVote(post, -1, post.communityId)
 												}
-											/>
+											/> */}
 										</Flex>
 										<Flex
 											align={'center'}
@@ -402,8 +403,16 @@ const PostItem: React.FC<PostItemProps> = ({
 											_hover={{ bg: 'gray.200' }}
 											cursor={'pointer'}
 										>
-											<Icon as={BsChat} mr={2} />
-											<Text fontSize={'9pt'}>
+											<Icon
+												as={BsChat}
+												mr={2}
+												fontSize={20}
+												color={'gray.400'}
+											/>
+											<Text
+												fontSize={'9pt'}
+												color={'gray.400'}
+											>
 												{post.numberOfComments}
 											</Text>
 										</Flex>
@@ -417,8 +426,15 @@ const PostItem: React.FC<PostItemProps> = ({
 											<Icon
 												as={IoArrowRedoOutline}
 												mr={2}
+												fontSize={20}
+												color={'gray.400'}
 											/>
-											<Text fontSize={'9pt'}>Share</Text>
+											<Text
+												fontSize={'9pt'}
+												color={'gray.400'}
+											>
+												Share
+											</Text>
 										</Flex>
 										<Flex
 											align={'center'}
@@ -427,8 +443,18 @@ const PostItem: React.FC<PostItemProps> = ({
 											_hover={{ bg: 'gray.200' }}
 											cursor={'pointer'}
 										>
-											<Icon as={IoBookmarkOutline} mr={2} />
-											<Text fontSize={'9pt'}>Save</Text>
+											<Icon
+												as={IoBookmarkOutline}
+												mr={2}
+												fontSize={20}
+												color={'gray.400'}
+											/>
+											<Text
+												fontSize={'9pt'}
+												color={'gray.400'}
+											>
+												Save
+											</Text>
 										</Flex>
 										{userIsCreator && (
 											<Flex
@@ -447,6 +473,7 @@ const PostItem: React.FC<PostItemProps> = ({
 														<Icon
 															as={AiOutlineDelete}
 															mr={2}
+															fontSize={20}
 														/>
 														<Text fontSize={'9pt'}>
 															Delete
