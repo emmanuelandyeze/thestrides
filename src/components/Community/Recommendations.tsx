@@ -148,7 +148,7 @@ const Recommendations: React.FC = () => {
 																textOverflow: 'ellipsis',
 															}}
 														>
-															{`c/${item.id}`}
+															{`${item.id}`}
 														</span>
 													</Flex>
 												</Flex>

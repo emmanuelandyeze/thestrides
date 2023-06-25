@@ -138,6 +138,7 @@ const PostItem: React.FC<PostItemProps> = ({
 									<HStack
 										align={'center'}
 										justify={'space-between'}
+										width={'100%'}
 									>
 										<Flex align={'center'}>
 											<Link href={`c/${post.communityId}`}>
@@ -176,7 +177,7 @@ const PostItem: React.FC<PostItemProps> = ({
 										>
 											<VStack align={'start'}>
 												<Text
-													fontSize={'12pt'}
+													fontSize={'15pt'}
 													fontWeight={600}
 												>
 													{post?.title}
@@ -217,7 +218,7 @@ const PostItem: React.FC<PostItemProps> = ({
 													)}
 												{singlePostPage && post.imageURL ? (
 													<Text
-														fontSize={'9pt'}
+														// fontSize={'11pt'}
 														fontWeight={400}
 														pt={5}
 													>
@@ -228,11 +229,11 @@ const PostItem: React.FC<PostItemProps> = ({
 																margin: 0,
 																overflow: 'auto',
 																overflowY: 'hidden',
-																fontSize: '12px',
+																fontSize: '13.5px',
 																lineHeight: '20px',
 																whiteSpace: 'pre-wrap',
 																fontFamily:
-																	'Open Sans, sans-serif',
+																	'Nunito, sans-serif',
 															}}
 														>
 															{post?.body}
@@ -242,7 +243,7 @@ const PostItem: React.FC<PostItemProps> = ({
 													<Wrap>
 														<WrapItem>
 															<Text
-																fontSize={'9pt'}
+																// fontSize={'11pt'}
 																noOfLines={[1, 2, 3]}
 																fontWeight={400}
 																pt={0}
@@ -254,11 +255,11 @@ const PostItem: React.FC<PostItemProps> = ({
 																		margin: 0,
 																		overflow: 'auto',
 																		overflowY: 'hidden',
-																		fontSize: '12px',
+																		fontSize: '13px',
 																		lineHeight: '20px',
 																		whiteSpace: 'pre-wrap',
 																		fontFamily:
-																			'Open Sans, sans-serif',
+																			'Nunito, sans-serif',
 																	}}
 																>
 																	{post?.body.slice(0, 200)}
@@ -308,7 +309,7 @@ const PostItem: React.FC<PostItemProps> = ({
 										<VStack align={'start'} width={'100%'}>
 											<VStack align={'start'}>
 												<Text
-													fontSize={'12pt'}
+													fontSize={'14pt'}
 													fontWeight={600}
 												>
 													{post?.title}
@@ -371,14 +372,14 @@ const PostItem: React.FC<PostItemProps> = ({
 												color={
 													userVoteValue === 1
 														? 'purple.500'
-														: 'gray.400'
+														: 'gray.600'
 												}
 												fontSize={22}
 												onClick={() =>
 													onVote(post, 1, post.communityId)
 												}
 											/>
-											<Text mx={2}>{post?.voteStatus}</Text>
+											<Text mx={2} color={'gray.600'}>{post?.voteStatus}</Text>
 											{/* <Icon
 												as={
 													userVoteValue === -1
@@ -407,11 +408,11 @@ const PostItem: React.FC<PostItemProps> = ({
 												as={BsChat}
 												mr={2}
 												fontSize={20}
-												color={'gray.400'}
+												color={'gray.600'}
 											/>
 											<Text
 												fontSize={'9pt'}
-												color={'gray.400'}
+												color={'gray.600'}
 											>
 												{post.numberOfComments}
 											</Text>
@@ -427,11 +428,11 @@ const PostItem: React.FC<PostItemProps> = ({
 												as={IoArrowRedoOutline}
 												mr={2}
 												fontSize={20}
-												color={'gray.400'}
+												color={'gray.600'}
 											/>
 											<Text
 												fontSize={'9pt'}
-												color={'gray.400'}
+												color={'gray.600'}
 											>
 												Share
 											</Text>
@@ -447,11 +448,11 @@ const PostItem: React.FC<PostItemProps> = ({
 												as={IoBookmarkOutline}
 												mr={2}
 												fontSize={20}
-												color={'gray.400'}
+												color={'gray.600'}
 											/>
 											<Text
 												fontSize={'9pt'}
-												color={'gray.400'}
+												color={'gray.600'}
 											>
 												Save
 											</Text>
