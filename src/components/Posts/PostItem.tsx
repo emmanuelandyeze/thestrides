@@ -83,7 +83,7 @@ const PostItem: React.FC<PostItemProps> = ({
 				border={'.5px solid'}
 				// bg={'white'}
 				borderColor={'gray.300'}
-				borderRadius={{base: 0, md: 10}}
+				borderRadius={{ base: 0, md: 10 }}
 				// my={3}
 				direction={'column'}
 			>
@@ -219,7 +219,8 @@ const PostItem: React.FC<PostItemProps> = ({
 															/>
 														</Flex>
 													)}
-												{singlePostPage && post.imageURL ? (
+												{singlePostPage &&
+												!post.imageURL ? (
 													<Text
 														// fontSize={'11pt'}
 														fontWeight={400}
@@ -242,7 +243,8 @@ const PostItem: React.FC<PostItemProps> = ({
 															{post?.body}
 														</pre>
 													</Text>
-												) : (
+												) : singlePostPage &&
+												  post?.imageURL ? (
 													<Wrap>
 														<WrapItem>
 															<Text
@@ -265,12 +267,37 @@ const PostItem: React.FC<PostItemProps> = ({
 																			'Nunito, sans-serif',
 																	}}
 																>
-																	{post?.body.slice(0, 200)}
+																	{post?.body}
 																	...
 																</pre>
 															</Text>
 														</WrapItem>
 													</Wrap>
+												) : (
+													<Text
+														// fontSize={'11pt'}
+														noOfLines={[1, 2, 3]}
+														fontWeight={400}
+														pt={0}
+													>
+														<pre
+															style={{
+																width: '100%',
+																padding: 0,
+																margin: 0,
+																overflow: 'auto',
+																overflowY: 'hidden',
+																fontSize: '13px',
+																lineHeight: '20px',
+																whiteSpace: 'pre-wrap',
+																fontFamily:
+																	'Nunito, sans-serif',
+															}}
+														>
+															{post?.body.slice(0, 200)}
+															...
+														</pre>
+													</Text>
 												)}
 												{!singlePostPage &&
 													post?.imageURL && (
