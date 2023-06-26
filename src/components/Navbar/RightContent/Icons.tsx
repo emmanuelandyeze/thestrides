@@ -17,7 +17,7 @@ type ActionIconsProps = {};
 const Icons: React.FC<ActionIconsProps> = () => {
 	return (
 		<Flex alignItems="center" flexGrow={1}>
-			<Box
+			{/* <Box
 				display={{ base: 'none', md: 'flex' }}
 				alignItems="center"
 				borderRight="1px solid"
@@ -53,7 +53,7 @@ const Icons: React.FC<ActionIconsProps> = () => {
 				>
 					<Icon as={IoVideocamOutline} fontSize={22} />
 				</Flex>
-			</Box>
+			</Box> */}
 			<>
 				<Flex
 					display={{ base: 'none', md: 'flex' }}

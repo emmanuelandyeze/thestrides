@@ -15,14 +15,14 @@ const PageContent: React.FC<
 			<Flex
 				width="100%"
 				justify="center"
-				maxWidth={maxWidth || '860px'}
+				maxWidth={maxWidth || '1050px'}
 			>
+				
 				<Flex
 					direction="column"
 					width={{ base: '100%', md: '65%' }}
 					mr={{ base: 0, md: 6 }}
-					borderLeft={'.5px solid'}
-					borderRight={'.5px solid'}
+					
 					borderColor={'gray.200'}
 				>
 					{children && children[0 as keyof typeof children]}

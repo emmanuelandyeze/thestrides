@@ -80,11 +80,11 @@ const PostItem: React.FC<PostItemProps> = ({
 	return (
 		<>
 			<Flex
-				borderTop={'.5px solid'}
+				border={'.5px solid'}
 				// bg={'white'}
 				borderColor={'gray.300'}
-				// borderRadius={5}
-
+				borderRadius={{base: 0, md: 10}}
+				// my={3}
 				direction={'column'}
 			>
 				<Flex
@@ -119,13 +119,16 @@ const PostItem: React.FC<PostItemProps> = ({
 											objectFit={'cover'}
 											height={'30px'}
 											width={'30px'}
+											border={'.5px solid'}
 										/>
 									) : (
 										<Icon
 											as={IoIosPeople}
-											fontSize="18pt"
+											fontSize="20pt"
 											mr={1}
 											color="blue.500"
+											border={'.5px solid'}
+											borderRadius="full"
 										/>
 									)}
 								</Flex>
@@ -379,7 +382,9 @@ const PostItem: React.FC<PostItemProps> = ({
 													onVote(post, 1, post.communityId)
 												}
 											/>
-											<Text mx={2} color={'gray.600'}>{post?.voteStatus}</Text>
+											<Text mx={2} color={'gray.600'}>
+												{post?.voteStatus}
+											</Text>
 											{/* <Icon
 												as={
 													userVoteValue === -1

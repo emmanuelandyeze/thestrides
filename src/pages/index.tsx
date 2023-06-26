@@ -168,11 +168,8 @@ const Home: NextPage = () => {
 						<PostLoader />
 					) : (
 						<Stack>
-							<Flex display={{ base: 'block', md: 'none' }}>
-								<Recommendations />
-							</Flex>
 							<Box
-								borderLeft={'.5px'}
+								// borderLeft={'.5px'}
 								borderColor={'gray.200'}
 							>
 								{postStateValue.posts.map((post) => (
@@ -194,6 +191,9 @@ const Home: NextPage = () => {
 									/>
 								))}
 							</Box>
+							<Flex display={{ base: 'block', md: 'none' }}>
+								<Recommendations />
+							</Flex>
 						</Stack>
 					)}
 				</>

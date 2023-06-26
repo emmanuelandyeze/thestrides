@@ -1,5 +1,6 @@
 import {
 	Box,
+	Divider,
 	Flex,
 	Icon,
 	MenuItem,
@@ -13,6 +14,7 @@ import { communityState } from '../../../atoms/communitiesAtom';
 import MenuListItem from './MenuListItem';
 import { FaReddit } from 'react-icons/fa';
 import {IoIosPeople} from 'react-icons/io'
+import Link from 'next/link';
 
 type CommunitiesProps = {};
 
@@ -27,6 +29,12 @@ const Communities: React.FC<CommunitiesProps> = () => {
 				open={open}
 				handleClose={() => setOpen(false)}
 			/>
+			<Link href={'/'}>
+				<Text px={3} fontSize={'11pt'} py={2} _hover={{bg: 'purple.600', color: 'white'}}>
+					Your Feed
+				</Text>
+			</Link>
+			<Divider />
 			<Box mt={3} mb={4}>
 				<Text
 					pl={3}
@@ -50,6 +58,7 @@ const Communities: React.FC<CommunitiesProps> = () => {
 						/>
 					))}
 			</Box>
+			<Divider />
 			<Box mt={3} mb={4}>
 				<Text
 					pl={3}

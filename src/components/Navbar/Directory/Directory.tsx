@@ -20,7 +20,7 @@ const Directory: React.FC = () => {
 		<Menu isOpen={directoryState.isOpen}>
 			<MenuButton
 				cursor="pointer"
-				padding={{ base: '0px', md: '0px 6px' }}
+				padding={{ base: '1px 6px', md: '0px 8px' }}
 				borderRadius={4}
 				mr={2}
 				ml={{ base: 0, md: 2 }}
@@ -29,6 +29,8 @@ const Directory: React.FC = () => {
 					outlineColor: 'gray.200',
 				}}
 				onClick={toggleMenuOpen}
+				bg={'gray.600'}
+				color={'white'}
 			>
 				<Flex
 					align="center"
@@ -59,7 +61,7 @@ const Directory: React.FC = () => {
 								onClick={toggleMenuOpen}
 							/>
 						)}
-						<Flex display={{ base: 'none', lg: 'flex' }}>
+						<Flex display={{ base: 'flex', lg: 'flex' }}>
 							<Text fontWeight={600} fontSize="10pt">
 								{
 									directoryState.selectedMenuItem
