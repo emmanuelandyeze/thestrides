@@ -11,7 +11,7 @@ const PageContent: React.FC<
 	PageContentProps
 > = ({ children, maxWidth }) => {
 	return (
-		<Flex justify="center" p="16px 0px">
+		<Flex justify="center" p="5px 0px 16px 0px">
 			<Flex
 				width="100%"
 				justify="center"

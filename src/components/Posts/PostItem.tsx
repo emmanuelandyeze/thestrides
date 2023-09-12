@@ -83,7 +83,7 @@ const PostItem: React.FC<PostItemProps> = ({
 				border={'.5px solid'}
 				// bg={'white'}
 				borderColor={'gray.300'}
-				borderRadius={{ base: 0, md: 10 }}
+				borderRadius={{ base: 0, md: 0 }}
 				// my={3}
 				direction={'column'}
 			>
@@ -160,7 +160,14 @@ const PostItem: React.FC<PostItemProps> = ({
 												color="gray.500"
 												fontSize={8}
 											/>
-											<Text>
+											<Text
+												_hover={{
+													textDecoration: 'underline',
+												}}
+												onClick={() =>
+													router.push(`/${post.creatorId}`)
+												}
+											>
 												@{post.creatorDisplayName}{' '}
 											</Text>
 										</Flex>

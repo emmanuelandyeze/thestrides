@@ -24,6 +24,7 @@ import { auth } from '@/src/firebase/clientApp';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { AuthModalState } from '@/src/atoms/authModalAtom';
 import { communityState } from '@/src/atoms/communitiesAtom';
+import { useRouter } from 'next/router';
 
 type UserMenuProps = {
 	user?: User | null;
@@ -32,6 +33,7 @@ type UserMenuProps = {
 const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
 	const setAuthModalState = useSetRecoilState(AuthModalState)
 	const resetCommunityState = useResetRecoilState(communityState)
+	const router = useRouter()
 
 	const logout = () => {
 		signOut(auth);
@@ -112,7 +114,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
 									color: 'white',
 								}}
 							>
-								<Flex align={'center'}>
+								<Flex align={'center'} onClick={() => router.push(`/${user.uid}`)}>
 									<Icon
 										fontSize={20}
 										mr={2}

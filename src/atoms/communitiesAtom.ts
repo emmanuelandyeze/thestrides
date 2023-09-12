@@ -2,6 +2,7 @@ import { Timestamp } from 'firebase/firestore';
 import { atom } from 'recoil';
 
 export interface Community {
+	communityDescription: string;
 	id: string;
 	creatorId: string;
 	numberOfMembers: number;

@@ -22,6 +22,9 @@ import { auth, firestore } from '../firebase/clientApp';
 import useCommunityData from '../hooks/useCommunityData';
 import usePosts from '../hooks/usePosts';
 import { NextSeo } from 'next-seo';
+import CommunityRecommendations from '../components/Community/CommunityRecommendations';
+import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const Home: NextPage = () => {
 	const [user, loadingUser] = useAuthState(auth);
@@ -167,33 +170,61 @@ const Home: NextPage = () => {
 					{loading ? (
 						<PostLoader />
 					) : (
-						<Stack>
-							<Box
-								// borderLeft={'.5px'}
-								borderColor={'gray.200'}
-							>
-								{postStateValue.posts.map((post) => (
-									<PostItem
-										key={post.id}
-										post={post}
-										onSelectPost={onSelectPost}
-										onDeletePost={onDeletePost}
-										onVote={onVote}
-										userVoteValue={
-											postStateValue.postVotes.find(
-												(item) => item.postId === post.id,
-											)?.voteValue
-										}
-										userIsCreator={
-											user?.uid === post.creatorId
-										}
-										homePage
-									/>
-								))}
-							</Box>
-							<Flex display={{ base: 'block', md: 'none' }}>
-								<Recommendations />
-							</Flex>
+						<Stack mt={0} pt={0}>
+							<Tabs>
+								<Flex
+									position={'fixed'}
+									bg={'white'}
+									  zIndex={100}
+									  w={'full'}
+								>
+									<TabList>
+										<Tab>Communities</Tab>
+										<Tab>Feed</Tab>
+									</TabList>
+								</Flex>
+
+								{/* <Flex pt={14}> */}
+									<TabPanel width={'full'}>
+										<Flex
+											display={{
+												base: 'block',
+												md: 'block',
+										  }}
+										  pt={10}
+										>
+											<CommunityRecommendations />
+										</Flex>
+									</TabPanel>
+									<TabPanel>
+										<Box
+											// borderLeft={'.5px'}
+										  borderColor={'gray.200'}
+										  pt={10}
+										>
+											{postStateValue.posts.map((post) => (
+												<PostItem
+													key={post.id}
+													post={post}
+													onSelectPost={onSelectPost}
+													onDeletePost={onDeletePost}
+													onVote={onVote}
+													userVoteValue={
+														postStateValue.postVotes.find(
+															(item) =>
+																item.postId === post.id,
+														)?.voteValue
+													}
+													userIsCreator={
+														user?.uid === post.creatorId
+													}
+													homePage
+												/>
+											))}
+										</Box>
+									</TabPanel>
+								{/* </Flex> */}
+							</Tabs>
 						</Stack>
 					)}
 				</>

@@ -13,7 +13,6 @@ export default function App({
 		<RecoilRoot>
 			<ChakraProvider theme={theme}>
 				<Layout>
-					
 					<Component {...pageProps} />
 				</Layout>
 			</ChakraProvider>
