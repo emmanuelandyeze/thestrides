@@ -25,6 +25,7 @@ import { NextSeo } from 'next-seo';
 import CommunityRecommendations from '../components/Community/CommunityRecommendations';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import YourCommunities from '../components/Community/YourCommunities';
 
 const Home: NextPage = () => {
 	const [user, loadingUser] = useAuthState(auth);
@@ -192,7 +193,10 @@ const Home: NextPage = () => {
 												md: 'block',
 										  }}
 										  pt={10}
-										>
+									  >
+										  {user && (
+											  <YourCommunities />
+										  )}
 											<CommunityRecommendations />
 										</Flex>
 									</TabPanel>
